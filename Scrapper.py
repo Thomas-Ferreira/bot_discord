@@ -1,10 +1,11 @@
 import time
+from tkinter import image_names
 from selenium import webdriver 
 from selenium.webdriver.chrome.service import Service
 import pandas as pd
 from pprint import pprint
 
-class Scrapper :
+class ScrapperTest :
 
     def navigate (self):
 
@@ -16,16 +17,18 @@ class Scrapper :
         browser.get(siteWeb)
         time.sleep(3)
 
-        imageLinks = browser.find_elements_by_xpath("//a//img")
-        imageNames = []
-        for element in range (0,1):
-            imageNames.add(element.get_attribute("src"))
-        
-        dictionary = {"Url": imageNames}
+        ##imageNames = []
+        for i in range (0,1):
+            ##imageNames = browser.find_elements_by_xpath("/html/body/div[6]/div[4]/ul/li/div/a/img")
+            imageNames = browser.find_elements_by_xpath("//div[@class='inner']")
+            imageNames[i].click()
+            time.sleep(1)
+            imageSrc = browser.find_element_by_id('image').get_attribute('src')
+                
         browser.close() # fermer le navigateur
 
-        return dictionary 
+        return imageSrc 
 
-scrapper1 = Scrapper()
-dict = scrapper1.navigate()
-pprint(dict)
+#scrapper1 = Scrapper()
+#dict = scrapper1.navigate()
+#pprint(dict)
