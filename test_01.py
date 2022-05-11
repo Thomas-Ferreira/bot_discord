@@ -54,7 +54,7 @@ async def on_message(msg):
     if msg.content == 'waifu please':
         data = Api()
         dict = data.data()
-        nbrAléatoire = random.randint(0,98)
+        nbrAléatoire = random.randint(0,99)
         await msg.channel.send(dict[nbrAléatoire])
 
 @bot.command()
