@@ -1,7 +1,8 @@
-import pandas as pd
+from turtle import pos
 import requests
 from pprint import pprint
 import json
+from pybooru import Moebooru
 
 class Api :
 
@@ -18,7 +19,21 @@ class Api :
         dictionary = {i : li_url[i] for i in range(0, len(li_url) ) }
 
         return dictionary
+    
+    def dataPybooru(self) :
+        client = Moebooru('konachan')
+        posts = client.post_list(tags ="genshin_impact")
+        li_url = []
 
-#data = Api()
+        for post in posts:
+            url =  post['file_url']
+            li_url.append(url)
+    
+        dictionary = {i : li_url[i] for i in range(0, len(li_url) ) }
+
+        return dictionary
+
+data = Api()
 #dict = data.data()
-#pprint(dict[0])
+dict=data.dataPybooru()
+pprint(dict[0])

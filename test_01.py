@@ -1,11 +1,7 @@
 from cgi import test
-import pprint
 import discord
 from discord.ext import commands
-import os
 from dotenv import load_dotenv
-import Scrapper
-from Scrapper import ScrapperTest
 from Api import Api
 import random
 
@@ -24,9 +20,7 @@ bot_help_message = """
 `!mc waifu`                   : surprise
 """
 
-available_commands = ['waifu']
-
-bot = commands.Bot(command_prefix="!")
+bot = commands.Bot(command_prefix='$')
 
 @bot.event
 async def on_ready():
@@ -42,10 +36,7 @@ async def on_message(msg):
         await msg.channel.send(f'Goodbye {msg.author}')
 
     if msg.content == '!mc':
-        #scrapper1 = ScrapperTest()
-        #dict = scrapper1.navigate()
-        await msg.channel.send(dict)
-
+        await msg.channel.send(bot_help_message)
 
     if 'BK' in msg.content:
         print('Keyword found')
@@ -57,13 +48,23 @@ async def on_message(msg):
         nbrAléatoire = random.randint(0,99)
         await msg.channel.send(dict[nbrAléatoire])
 
+    await bot.process_commands(msg)
+
 @bot.command()
 async def mc(ctx, arg):
+    if arg == 'help':
+        await ctx.send(bot_help_message)
+
     if arg == 'waifu':
-        ##scrapper1 = Scrapper()
-        ##dict = scrapper1.navigate()
-        ctx.send(f'test success')
+        data = Api()
+        dict = data.dataPybooru()
+        nbrAléatoire = random.randint(0,99)
+        await ctx.channel.send(dict[0])
         print('success')
+    
+@bot.command()
+async def test(ctx, *args):
+    await ctx.send('{} arguments: {}'.format(len(args), ', '.join(args)))
     
 
 bot.run(DISCORD_TOKEN)
