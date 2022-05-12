@@ -22,7 +22,7 @@ class Api :
     
     def dataPybooru(self) :
         client = Moebooru('konachan')
-        posts = client.post_list(tags ="genshin_impact")
+        posts = client.post_list(tags ="genshin_impact", limit = 100)
         li_url = []
 
         for post in posts:
@@ -33,7 +33,7 @@ class Api :
 
         return dictionary
 
-data = Api()
+#data = Api()
 #dict = data.data()
-dict=data.dataPybooru()
-pprint(dict[0])
+#dict=data.dataPybooru()
+#pprint(dict[0])

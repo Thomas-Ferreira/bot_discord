@@ -17,7 +17,9 @@ bot = discord.Client()
 
 bot_help_message = """
 :: Bot Usage ::
-`!mc waifu`                   : surprise
+`$borgar`                   : show help
+`$test`                     : test command
+`$borgar waifu`             : surprise
 """
 
 bot = commands.Bot(command_prefix='$')
@@ -35,7 +37,7 @@ async def on_message(msg):
     if msg.content == 'goodbye':
         await msg.channel.send(f'Goodbye {msg.author}')
 
-    if msg.content == '!mc':
+    if msg.content == '$borgar':
         await msg.channel.send(bot_help_message)
 
     if 'BK' in msg.content:
@@ -51,7 +53,7 @@ async def on_message(msg):
     await bot.process_commands(msg)
 
 @bot.command()
-async def mc(ctx, arg):
+async def borgar(ctx, arg):
     if arg == 'help':
         await ctx.send(bot_help_message)
 
@@ -59,7 +61,7 @@ async def mc(ctx, arg):
         data = Api()
         dict = data.dataPybooru()
         nbrAléatoire = random.randint(0,99)
-        await ctx.channel.send(dict[0])
+        await ctx.channel.send(dict[nbrAléatoire])
         print('success')
     
 @bot.command()
