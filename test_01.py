@@ -12,14 +12,12 @@ load_dotenv()
 DISCORD_TOKEN = 'OTczNjEzMjA2ODA5NTA1Nzky.GnUKFf.QKV5J9NZhYieVwvDUG5zPyXHPhYEmQmiEcUiWE'
 bot = discord.Client()
 
-#scrapper1 = ScrapperTest()
-#dict = scrapper1.navigate()
-
 bot_help_message = """
 :: Bot Usage ::
 `$borgar`                   : show help
 `$test`                     : test command
 `$borgar waifu`             : surprise
+`$waifu`                    : surprise
 """
 
 bot = commands.Bot(command_prefix='$')
@@ -67,6 +65,14 @@ async def borgar(ctx, arg):
 @bot.command()
 async def test(ctx, *args):
     await ctx.send('{} arguments: {}'.format(len(args), ', '.join(args)))
+
+@bot.command()
+async def waifu(ctx, arg):
+    data = Api()
+    dict = data.dataPybooru(arg)
+    nbrAléatoire = random.randint(0,99)
+    await ctx.channel.send(dict[nbrAléatoire])
+    print('success')
     
 
 bot.run(DISCORD_TOKEN)

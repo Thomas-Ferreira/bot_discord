@@ -20,14 +20,20 @@ class Api :
 
         return dictionary
     
-    def dataPybooru(self) :
+    def dataPybooru(self, tag) :
         client = Moebooru('konachan')
-        posts = client.post_list(tags ="genshin_impact", limit = 100)
+        posts = client.post_list(tags =tag, limit = 100)
         li_url = []
+        li_rating = []
 
         for post in posts:
             url =  post['file_url']
-            li_url.append(url)
+            rating = post['rating']
+            if rating == 'e':
+                li_url.append('|| {0} ||'.format(url))
+            else :
+                li_url.append(url)
+            li_rating.append(rating)
     
         dictionary = {i : li_url[i] for i in range(0, len(li_url) ) }
 
@@ -35,5 +41,5 @@ class Api :
 
 #data = Api()
 #dict = data.data()
-#dict=data.dataPybooru()
-#pprint(dict[0])
+#dict=data.dataPybooru('genshin_impact')
+#pprint(dict)
