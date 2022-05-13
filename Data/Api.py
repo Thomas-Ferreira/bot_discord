@@ -22,9 +22,9 @@ class Api :
     
     def dataPybooru(self, tag) :
         client = Moebooru('konachan')
-        posts = client.post_list(tags =tag, limit = 100)
         li_url = []
         li_rating = []
+        posts = client.post_list(tags =tag, limit = 100)
 
         for post in posts:
             url =  post['file_url']
@@ -33,13 +33,8 @@ class Api :
                 li_url.append('|| {0} ||'.format(url))
             else :
                 li_url.append(url)
-            li_rating.append(rating)
-    
+                li_rating.append(rating)
+
         dictionary = {i : li_url[i] for i in range(0, len(li_url) ) }
 
         return dictionary
-
-#data = Api()
-#dict = data.data()
-#dict=data.dataPybooru('genshin_impact')
-#pprint(dict)

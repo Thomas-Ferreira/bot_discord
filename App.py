@@ -2,7 +2,7 @@ from cgi import test
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
-from Api import Api
+from Data.Api import Api
 import random
 
 BOT_NAME = "Borgar_bot"
@@ -68,11 +68,16 @@ async def test(ctx, *args):
 
 @bot.command()
 async def waifu(ctx, arg):
-    data = Api()
-    dict = data.dataPybooru(arg)
+    dict = getResultApi(arg)
     nbrAléatoire = random.randint(0,99)
+    print(dict[nbrAléatoire])
     await ctx.channel.send(dict[nbrAléatoire])
+    #await ctx.channel.send('error : {0}'.format(TypeError))
     print('success')
-    
 
 bot.run(DISCORD_TOKEN)
+
+def getResultApi(arg) :
+    data = Api()
+    dict = data.dataPybooru(arg)
+    return dict
