@@ -22,6 +22,11 @@ bot_help_message = """
 
 bot = commands.Bot(command_prefix='$')
 
+def getResultApi(arg) :
+    data = Api()
+    dict = data.dataPybooru(arg)
+    return dict
+
 @bot.event
 async def on_ready():
     print(f'{bot.user} has logged in.')
@@ -76,8 +81,3 @@ async def waifu(ctx, arg):
     print('success')
 
 bot.run(DISCORD_TOKEN)
-
-def getResultApi(arg) :
-    data = Api()
-    dict = data.dataPybooru(arg)
-    return dict

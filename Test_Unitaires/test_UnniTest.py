@@ -1,6 +1,5 @@
 import unittest
 from Data.Api import Api
-import App
 
 class TestApiMethods(unittest.TestCase):
 
@@ -13,10 +12,17 @@ class TestApiMethods(unittest.TestCase):
 
 class TestBotMethods(unittest.TestCase):
 
-    def setUp(self):
-        self.scrapper_1 = Api()
-        self.test_dict = self.scrapper_1.dataPybooru('raiden_shogun')
+    dict1 = {"id": 1, "url": 'url'}
+    dict2 = {}
+    
+    def tes_getResultApiTrue(self):
+        getResultApi(self.dict1)
 
+
+def getResultApi(arg) :
+    data = Api()
+    dict = data.dataPybooru(arg)
+    return dict
 
 if __name__ == '__main__':
     unittest.main()
