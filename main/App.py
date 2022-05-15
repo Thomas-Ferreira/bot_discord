@@ -80,4 +80,8 @@ async def waifu(ctx, arg):
     #await ctx.channel.send('error : {0}'.format(TypeError))
     print('success')
 
+@bot.command()
+async def ping(ctx):
+    await ctx.channel.send('<@319939436743884800>')
+
 bot.run(DISCORD_TOKEN)
