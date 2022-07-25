@@ -3,6 +3,7 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 from Data.Api import Api
+from Data.EpicGamesApi import EpicGamesApi
 import random
 
 BOT_NAME = "Borgar_bot"
@@ -81,7 +82,11 @@ async def waifu(ctx, arg):
     print('success')
 
 @bot.command()
-async def ping(ctx):
-    await ctx.channel.send('<@319939436743884800>')
+async def freeGames(ctx, arg):
+    data = EpicGamesApi()
+    dict = data.getFreeGames()
+    await ctx.channel.send(dict)
+    print('sucess')
+
 
 bot.run(DISCORD_TOKEN)
